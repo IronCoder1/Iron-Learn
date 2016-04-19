@@ -19,7 +19,7 @@
     //
     
 NSTimer *speedoMeterCounter;
-NSDateFormatter *dateFormatterForCircuit;
+NSDateFormatter *dateFormatter;
 NSInteger *currentSpeed;
 
 }
@@ -63,10 +63,10 @@ NSInteger *currentSpeed;
     NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"dMMMMyyyy"
                                                              options:0
                                                               locale:[NSLocale currentLocale]];
-    NSDateFormatter *dateFormatterForCircuit = [[NSDateFormatter alloc] init];
-    NSDate *currDate = [NSDate date];
-    dateFormatterForCircuit.dateFormat = formatString;
-    NSString *currDateString = [dateFormatterForCircuit stringFromDate:currDate];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    dateFormatter.dateFormat = formatString;
+    NSString *currDateString = [dateFormatter stringFromDate:[NSDate date]];
    
     _presentTimeLabel.text = [NSString stringWithFormat:@"%@",currDateString];
     
@@ -83,7 +83,7 @@ NSInteger *currentSpeed;
     //
     // 7. The speedLabel should be set to "% MPH", with the % being the current speed
     //
-    _speedLabel.text = [NSString stringWithFormat:@"%ld", currentSpeed];
+    _speedLabel.text = [NSString stringWithFormat:@"%ld", (long)currentSpeed];
     
     //
     // 8. The lastTimeDeparted label needs to be set to "--- -- ----"
@@ -109,7 +109,6 @@ NSInteger *currentSpeed;
         //
         // 10. This view controller needs to be set as the time picker view controller's delegate object.
         timePickerVC.delegate = timePickerVC.self;
-    
     }
 }
 
@@ -121,8 +120,7 @@ NSInteger *currentSpeed;
     // 12. The destinationTimeLabel needs to be set to the destination date using our date formatter object
     //
     
-    _destinationTimeLabel.text = [NSString stringWithFormat:<#(nonnull NSString *), ...#>]
-    
+    _destinationTimeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:destinationDate]];
 }
 
 #pragma mark - Action Handlers
@@ -133,6 +131,7 @@ NSInteger *currentSpeed;
     // 13. This is where we will start counting the speedometer up to 88 MPH. We need to use the timer object to do that. Is
     //    there a method defined that will allow us to get the timer started?
     //
+    
 
 }
 
