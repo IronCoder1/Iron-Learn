@@ -13,6 +13,7 @@
 		6C971D241CC6E6C60032AE70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C971D221CC6E6C60032AE70 /* Main.storyboard */; };
 		6C971D261CC6E6C60032AE70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C971D251CC6E6C60032AE70 /* Assets.xcassets */; };
 		6C971D291CC6E6C60032AE70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C971D271CC6E6C60032AE70 /* LaunchScreen.storyboard */; };
+		6C971D321CC6F1900032AE70 /* QuickPick.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C971D311CC6F1900032AE70 /* QuickPick.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		6C971D251CC6E6C60032AE70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C971D281CC6E6C60032AE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C971D2A1CC6E6C60032AE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6C971D301CC6F1900032AE70 /* QuickPick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickPick.h; sourceTree = "<group>"; };
+		6C971D311CC6F1900032AE70 /* QuickPick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickPick.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +65,8 @@
 				6C971D1D1CC6E6C60032AE70 /* AppDelegate.m */,
 				6C971D1F1CC6E6C60032AE70 /* ViewController.h */,
 				6C971D201CC6E6C60032AE70 /* ViewController.m */,
+				6C971D301CC6F1900032AE70 /* QuickPick.h */,
+				6C971D311CC6F1900032AE70 /* QuickPick.m */,
 				6C971D221CC6E6C60032AE70 /* Main.storyboard */,
 				6C971D251CC6E6C60032AE70 /* Assets.xcassets */,
 				6C971D271CC6E6C60032AE70 /* LaunchScreen.storyboard */,
@@ -151,6 +156,7 @@
 			files = (
 				6C971D211CC6E6C60032AE70 /* ViewController.m in Sources */,
 				6C971D1E1CC6E6C60032AE70 /* AppDelegate.m in Sources */,
+				6C971D321CC6F1900032AE70 /* QuickPick.m in Sources */,
 				6C971D1B1CC6E6C60032AE70 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,7 +18,7 @@
     //    The last is an NSInteger object to hold the current speed of the DeLorean.
     //
     
-NSTimer *speedoMeterCounter;
+NSTimer *speedoMeterTimer;
 NSDateFormatter *dateFormatter;
 NSInteger *currentSpeed;
 
@@ -49,7 +49,7 @@ NSInteger *currentSpeed;
     
     //
     // 2. The view should be titled "Time Circuits"
-    //
+    //self.
     
     //
     // 3. This is a good place to initialize the objects that will be used later on.
@@ -108,19 +108,22 @@ NSInteger *currentSpeed;
         DatePickerViewController *timePickerVC = (DatePickerViewController *)[segue destinationViewController];
         //
         // 10. This view controller needs to be set as the time picker view controller's delegate object.
-        timePickerVC.delegate = timePickerVC.self;
+      timePickerVC.delegate = self;
     }
 }
 
-#pragma mark - TimeCircuitsDatePickerDelegate
+//DELEGATE SENT TO INSTANCE OF TIME CIRCUIT VIEW CONTROLLER
 
 - (void)destinationDateWasChosen:(NSDate *)destinationDate
 {
     //
     // 12. The destinationTimeLabel needs to be set to the destination date using our date formatter object
     //
+  
+    //_destinationTimeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:destinationDate]];
     
-    _destinationTimeLabel.text = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:destinationDate]];
+    self.destinationTimeLabel.text = [dateFormatter stringFromDate:destinationDate];
+
 }
 
 #pragma mark - Action Handlers
@@ -132,6 +135,10 @@ NSInteger *currentSpeed;
     //    there a method defined that will allow us to get the timer started?
     //
     
+    if (!speedoMeterTimer)
+    {
+        speedoMeterTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateSpeed) userInfo:nil repeats:YES];
+    }
 
 }
 
@@ -169,6 +176,9 @@ NSInteger *currentSpeed;
     //    Once it's stopped, we want to nil out the object so we can create a new one when the user asks to travel back
     //    again.
     //
+    
+    [speedoMeterTimer invalidate];
+    speedoMeterTimer = nil;
 
     
 }

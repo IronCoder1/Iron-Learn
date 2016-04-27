@@ -11,6 +11,8 @@
 
 @interface DatePickerViewController : UIViewController
 
-@property (strong, nonatomic) id <TimeCircuitsDatePickerDelegate> delegate;
+//delegates should always weak, CONFIRMS TO THIS PROTOL
+
+@property (weak, nonatomic) id <TimeCircuitsDatePickerDelegate> delegate;
 
 @end
