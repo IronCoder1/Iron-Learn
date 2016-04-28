@@ -9,7 +9,8 @@
 #import "TimeCircuitsViewController.h"
 #import "DatePickerViewController.h"
 
-@interface TimeCircuitsViewController ()
+@interface TimeCircuitsViewController ()<TimeCircuitsDatePickerDelegate>  //this is the delegate
+
 {
     //
     // 1. We need three variables to hold various info.
@@ -105,10 +106,10 @@ NSInteger *currentSpeed;
 {
     if ([segue.identifier isEqualToString:@"ShowDestinationDatePickerSegue"])
     {
-        DatePickerViewController *timePickerVC = (DatePickerViewController *)[segue destinationViewController];
+        DatePickerViewController *datePickerVC =[segue destinationViewController];
         //
         // 10. This view controller needs to be set as the time picker view controller's delegate object.
-      timePickerVC.delegate = self;
+      datePickerVC.delegate = self;
     }
 }
 
@@ -188,8 +189,8 @@ NSInteger *currentSpeed;
     //
     // 17. We need to check if the current speed variable is set to 88 yet.
     //
-    if (88)
-    {
+//    if (88)
+//    {
         //
         // 18. If it's not yet set to 88, we want to increment the current speed variable by 1.
         //
@@ -197,9 +198,22 @@ NSInteger *currentSpeed;
         //
         // 19. Here we want to update the speed label to reflect the current speed.
         //
+    
+    if ((int)currentSpeed < 88)
+    {
+        currentSpeed++;
+        self.speedLabel.text = [NSString stringWithFormat:@"%ld MPH", (long)currentSpeed];
     }
     else
     {
+        [self stopTimer];
+        self.lastTimeDepartedLabel.text = self.presentTimeLabel.text;
+        self.presentTimeLabel.text = self.destinationTimeLabel.text;
+        self.speedLabel.text = @"0 MPH";
+        currentSpeed = 0;
+    }
+//    else
+//    {
         //
         // 20. If the speed variable is at least 88, we want to stop the timer here.
         //
@@ -217,6 +231,6 @@ NSInteger *currentSpeed;
         //
         
     }
-}
+
 
 @end

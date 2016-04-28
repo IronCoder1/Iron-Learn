@@ -21,6 +21,5 @@
 //    view. The way to declare a class as a delegate is to put the name of the delegate in between <>. It goes after the
 //    superclass declaration (UIViewController below)
 
-@interface TimeCircuitsViewController : UIViewController <TimeCircuitsDatePickerDelegate>  //this is the delegate
-
+@interface TimeCircuitsViewController : UIViewController 
 @end

@@ -7,8 +7,9 @@
 //
 
 #import "LotteryViewControllerTableViewController.h"
+#import "TicketCheckerViewController.h"
 
-@interface LotteryViewControllerTableViewController ()
+@interface LotteryViewControllerTableViewController ()<TicketCheckerViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *ticketListArray;
 
@@ -23,7 +24,10 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTicket:)];
     
+//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]init]initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(checkTicket:)];
+    
     self.ticketListArray = [[NSMutableArray alloc] initWithCapacity:0];
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -31,6 +35,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
+
+-(void)sendWinningNumbers:(NSArray *)myTicketNumberss{
+
+}
+//method to check winning numbers
+//-(void)checkWinnings{
+//    
+//    for (LotteryTickets *holdingTicket in self.)
+//    }
+//}
 -(void)addTicket:(id)sender
 {
     LotteryTickets *newTicket = [[LotteryTickets alloc]initWithRandomNumber];

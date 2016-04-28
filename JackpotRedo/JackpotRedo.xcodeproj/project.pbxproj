@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C416D6B1CD16950003F41C8 /* TicketCheckerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C416D6A1CD16950003F41C8 /* TicketCheckerViewController.m */; };
 		6C971D411CC7E1E20032AE70 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C971D401CC7E1E20032AE70 /* main.m */; };
 		6C971D441CC7E1E20032AE70 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C971D431CC7E1E20032AE70 /* AppDelegate.m */; };
 		6C971D4A1CC7E1E20032AE70 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C971D481CC7E1E20032AE70 /* Main.storyboard */; };
@@ -17,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C416D691CD16950003F41C8 /* TicketCheckerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TicketCheckerViewController.h; path = ../TicketCheckerViewController.h; sourceTree = "<group>"; };
+		6C416D6A1CD16950003F41C8 /* TicketCheckerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TicketCheckerViewController.m; path = ../TicketCheckerViewController.m; sourceTree = "<group>"; };
 		6C971D3C1CC7E1E20032AE70 /* JackpotRedo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JackpotRedo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C971D401CC7E1E20032AE70 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6C971D421CC7E1E20032AE70 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -25,10 +28,10 @@
 		6C971D4B1CC7E1E20032AE70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C971D4E1CC7E1E20032AE70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6C971D501CC7E1E20032AE70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6C971D561CC7E1FF0032AE70 /* LotteryTickets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LotteryTickets.h; sourceTree = "<group>"; };
-		6C971D571CC7E1FF0032AE70 /* LotteryTickets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LotteryTickets.m; sourceTree = "<group>"; };
-		6C971D591CC7EA960032AE70 /* LotteryViewControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LotteryViewControllerTableViewController.h; sourceTree = "<group>"; };
-		6C971D5A1CC7EA960032AE70 /* LotteryViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LotteryViewControllerTableViewController.m; sourceTree = "<group>"; };
+		6C971D561CC7E1FF0032AE70 /* LotteryTickets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LotteryTickets.h; path = ../LotteryTickets.h; sourceTree = "<group>"; };
+		6C971D571CC7E1FF0032AE70 /* LotteryTickets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LotteryTickets.m; path = ../LotteryTickets.m; sourceTree = "<group>"; };
+		6C971D591CC7EA960032AE70 /* LotteryViewControllerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LotteryViewControllerTableViewController.h; path = ../LotteryViewControllerTableViewController.h; sourceTree = "<group>"; };
+		6C971D5A1CC7EA960032AE70 /* LotteryViewControllerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LotteryViewControllerTableViewController.m; path = ../LotteryViewControllerTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,10 +48,6 @@
 		6C971D331CC7E1E20032AE70 = {
 			isa = PBXGroup;
 			children = (
-				6C971D591CC7EA960032AE70 /* LotteryViewControllerTableViewController.h */,
-				6C971D5A1CC7EA960032AE70 /* LotteryViewControllerTableViewController.m */,
-				6C971D561CC7E1FF0032AE70 /* LotteryTickets.h */,
-				6C971D571CC7E1FF0032AE70 /* LotteryTickets.m */,
 				6C971D3E1CC7E1E20032AE70 /* JackpotRedo */,
 				6C971D3D1CC7E1E20032AE70 /* Products */,
 			);
@@ -65,6 +64,12 @@
 		6C971D3E1CC7E1E20032AE70 /* JackpotRedo */ = {
 			isa = PBXGroup;
 			children = (
+				6C416D691CD16950003F41C8 /* TicketCheckerViewController.h */,
+				6C416D6A1CD16950003F41C8 /* TicketCheckerViewController.m */,
+				6C971D591CC7EA960032AE70 /* LotteryViewControllerTableViewController.h */,
+				6C971D5A1CC7EA960032AE70 /* LotteryViewControllerTableViewController.m */,
+				6C971D561CC7E1FF0032AE70 /* LotteryTickets.h */,
+				6C971D571CC7E1FF0032AE70 /* LotteryTickets.m */,
 				6C971D421CC7E1E20032AE70 /* AppDelegate.h */,
 				6C971D431CC7E1E20032AE70 /* AppDelegate.m */,
 				6C971D481CC7E1E20032AE70 /* Main.storyboard */,
@@ -158,6 +163,7 @@
 				6C971D441CC7E1E20032AE70 /* AppDelegate.m in Sources */,
 				6C971D5B1CC7EA960032AE70 /* LotteryViewControllerTableViewController.m in Sources */,
 				6C971D411CC7E1E20032AE70 /* main.m in Sources */,
+				6C416D6B1CD16950003F41C8 /* TicketCheckerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,6 +310,7 @@
 				6C971D551CC7E1E20032AE70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
