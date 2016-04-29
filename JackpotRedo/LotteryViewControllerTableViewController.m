@@ -8,10 +8,13 @@
 
 #import "LotteryViewControllerTableViewController.h"
 #import "TicketCheckerViewController.h"
+#import "CellViewController.h"
 
 @interface LotteryViewControllerTableViewController ()<TicketCheckerViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *ticketListArray;
+@property (nonatomic, strong) NSArray * winningNumbers;
+
 
 @end
 
@@ -27,30 +30,41 @@
 //    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]init]initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(checkTicket:)];
     
     self.ticketListArray = [[NSMutableArray alloc] initWithCapacity:0];
-    
+    self.winningNumbers = [NSArray arrayWithObjects:[NSNumber numberWithInt:10] , [NSNumber numberWithInt:17], [NSNumber numberWithInt:13], [NSNumber numberWithInt:18], [NSNumber numberWithInt:43], [NSNumber numberWithInt:35],nil];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
 }
 
+-(void)checkWinningTicket{
+   
+    for (LotteryTickets *ticketToCheck in self.ticketListArray){
+         int matchingNumbers = 0;
+        for (NSNumber *newNumber in ticketToCheck.lotteryNumbers){
+            for (NSNumber *winningNumber in self.winningNumbers){
+                if ([newNumber isEqualToNumber:winningNumber]) {
+                    matchingNumbers++;
+                }
+            }
+            if (matchingNumbers > 3) {
+                BOOL aWinningTicket = YES;
+            }
+        }
+    }
+}
 
 -(void)sendWinningNumbers:(NSArray *)myTicketNumberss{
 
 }
-//method to check winning numbers
-//-(void)checkWinnings{
-//    
-//    for (LotteryTickets *holdingTicket in self.)
-//    }
-//}
+    
+
 -(void)addTicket:(id)sender
 {
     LotteryTickets *newTicket = [[LotteryTickets alloc]initWithRandomNumber];
-    
     [self.ticketListArray addObject:newTicket];
-    // NSLog(@"%@", self.ticketListArray);
     
     [self.tableView reloadData];
 }
@@ -73,7 +87,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"quickPickCell" forIndexPath:indexPath];
+    UITableViewCell *cell = (CellViewController *)[[tableView dequeueReusableCellWithIdentifier:@"quickPickCell" forIndexPath:indexPath];
     
 //    LotteryTickets *newLotteryTicket = self.ticketListArray[indexPath.row];
 //    cell.textLabel.text = [newLotteryTicket.lotteryNumbers componentsJoinedByString:@","];
@@ -105,6 +119,13 @@
     return YES;
 }
 */
+    
+    //method to check winning numbers
+    //-(void)checkWinnings{
+    //
+    //    for (LotteryTickets *holdingTicket in self.)
+    //    }
+    //}
 
 /*
 // Override to support editing the table view.
