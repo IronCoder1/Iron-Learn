@@ -8,9 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LotteryTickets : NSObject
+@interface LotteryTickets : NSObject <NSCoding>
 
-@property (strong, nonatomic, readonly)  NSArray *lotteryNumbers;
+@property (strong, nonatomic, readonly)  NSArray *lotteryNumbersArray;
+@property (assign, nonatomic) BOOL isWinner;
+@property (assign, nonatomic) NSUInteger winAmount;
 
 -(instancetype) initWithRandomNumber;
 

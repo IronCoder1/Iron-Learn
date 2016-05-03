@@ -7,7 +7,7 @@
 //
 
 #import "LotteryTickets.h"
-
+#import "LotteryViewControllerTableViewController.h"
 @implementation LotteryTickets
 
 -(instancetype)initWithRandomNumber
@@ -23,9 +23,26 @@
             
             NSLog(@"holdingarray  is %@", holdingArray);
         }
-        _lotteryNumbers = holdingArray;
-        // NSLog(@"%@", _lotteryNumbers);
+        _lotteryNumbersArray = holdingArray;
+      
     }
     return self;
 }
+
+- (void) encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:self.lotteryNumbersArray forKey:@"lotteryNumbersArray"];
+    [encoder encodeInteger:self.winAmount forKey:@"winAmount"];
+    [encoder encodeBool:self.isWinner forKey:@"isWinner"];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    if (self = [super init]) {
+        _lotteryNumbersArray = [decoder decodeObjectForKey:@"lotteryNumbersArray"];
+        _winAmount = [decoder decodeIntegerForKey:@"winAmount"];
+        _isWinner = [decoder decodeBoolForKey:@"isWinner"];
+        
+    }
+    return self;
+}
+
 @end

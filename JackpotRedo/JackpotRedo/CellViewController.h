@@ -11,5 +11,6 @@
 @interface CellViewController : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *annoucementLabel;
 @property (weak, nonatomic) IBOutlet UILabel *winAmountLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ticketLabel;
 
 @end

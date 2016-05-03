@@ -9,11 +9,11 @@
 #import "LotteryViewControllerTableViewController.h"
 #import "TicketCheckerViewController.h"
 #import "CellViewController.h"
+#import "LotteryTickets.h"
 
 @interface LotteryViewControllerTableViewController ()<TicketCheckerViewControllerDelegate>
 
 @property (nonatomic, strong) NSMutableArray *ticketListArray;
-@property (nonatomic, strong) NSArray * winningNumbers;
 
 
 @end
@@ -27,47 +27,99 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTicket:)];
     
-//    self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc]init]initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(checkTicket:)];
-    
     self.ticketListArray = [[NSMutableArray alloc] initWithCapacity:0];
-    self.winningNumbers = [NSArray arrayWithObjects:[NSNumber numberWithInt:10] , [NSNumber numberWithInt:17], [NSNumber numberWithInt:13], [NSNumber numberWithInt:18], [NSNumber numberWithInt:43], [NSNumber numberWithInt:35],nil];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    NSLog(@"your winning nos are%@", self.winningNumbers);
+   
+   // [self loadTicket];
 }
 
--(void)checkWinningTicket{
-   
-    for (LotteryTickets *ticketToCheck in self.ticketListArray){
-         int matchingNumbers = 0;
-        for (NSNumber *newNumber in ticketToCheck.lotteryNumbers){
-            for (NSNumber *winningNumber in self.winningNumbers){
-                if ([newNumber isEqualToNumber:winningNumber]) {
-                    matchingNumbers++;
-                }
-            }
-            if (matchingNumbers > 3) {
-                BOOL aWinningTicket = YES;
-            }
-        }
-    }
-}
+
 
 -(void)sendWinningNumbers:(NSArray *)myTicketNumberss{
-
-}
     
-
+   
+    for (LotteryTickets *ticketToCheck in self.ticketListArray){
+        int matchingNumbers = 0;
+        for (NSNumber *newNumber in ticketToCheck.lotteryNumbersArray){
+            for (NSNumber *winningNumber in myTicketNumberss){
+                if ([newNumber isEqualToNumber:winningNumber]) {
+                    matchingNumbers++;
+                }  //end if
+            }  //end winning nos
+        }  //end ticket nos
+        switch (matchingNumbers) {
+            case 3: {
+                
+            ticketToCheck.winAmount = 1;
+                ticketToCheck.isWinner = YES;
+            }
+                break;
+            case 4: {
+                ticketToCheck.winAmount = 5;
+                ticketToCheck.isWinner = YES;
+            }
+                break;
+            case 5: {
+                
+            ticketToCheck.winAmount = 20;
+                ticketToCheck.isWinner = YES;
+            }
+                break;
+            case 6:{
+                
+            ticketToCheck.winAmount = 100;
+                ticketToCheck.isWinner = YES;
+            }
+                break;
+                
+            default: {
+                ticketToCheck.winAmount = 0;
+                ticketToCheck.isWinner = NO;
+            }
+                break;
+        }
+ 
+    }
+    [self.tableView reloadData];
+}
 -(void)addTicket:(id)sender
 {
     LotteryTickets *newTicket = [[LotteryTickets alloc]initWithRandomNumber];
     [self.ticketListArray addObject:newTicket];
     
+    
+    [self.tableView reloadData];
+    [self saveTicket];
+}
+
+#pragma mark NSCoding
+
+- (NSURL *)applicationDocumentDirectory {
+    
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+-(void)saveTicket{
+
+ NSString *mypath = [[self applicationDocumentDirectory].path stringByAppendingPathComponent:@"lotteryNumbersArray"];
+    
+   
+    NSData *theData = [NSKeyedArchiver archivedDataWithRootObject:self.ticketListArray];
+    
+    [theData writeToFile:mypath atomically:YES];
+}
+
+-(void)loadTicket{
+    
+    NSString *path = [[self applicationDocumentDirectory].path stringByAppendingPathComponent:@"lotteryNumbersArray"];
+    
+    NSData *myData = [NSData dataWithContentsOfFile:path];
+    self.ticketListArray = [NSKeyedUnarchiver unarchiveObjectWithData:myData];
+    
     [self.tableView reloadData];
 }
+
+
+
 
 
 - (void)didReceiveMemoryWarning {
@@ -75,6 +127,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma tableview
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -87,7 +140,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = (CellViewController *)[tableView dequeueReusableCellWithIdentifier:@"quickPickCell" forIndexPath:indexPath];
+    CellViewController *cell = (CellViewController *)[tableView dequeueReusableCellWithIdentifier:@"quickPickCell" forIndexPath:indexPath];
     
 //    LotteryTickets *newLotteryTicket = self.ticketListArray[indexPath.row];
 //    cell.textLabel.text = [newLotteryTicket.lotteryNumbers componentsJoinedByString:@","];
@@ -101,14 +154,37 @@
     [formatter setPaddingCharacter:@"0"];
     
     NSMutableArray *tempNumbers = [NSMutableArray array];
-    for (NSNumber *number in newLotteryTicket.lotteryNumbers)
+    for (NSNumber *number in newLotteryTicket.lotteryNumbersArray)
     {
         NSString *numberString = [formatter stringFromNumber:number];
         [tempNumbers addObject:numberString];
     }
-    cell.textLabel.text = [tempNumbers componentsJoinedByString:@", "];
+    cell.ticketLabel.text = [tempNumbers componentsJoinedByString:@", "];
     
+    if (newLotteryTicket.isWinner) {
+        cell.annoucementLabel.text = @"You Win!";
+        cell.annoucementLabel.textColor = [UIColor blueColor];
+
+    }
+    else if(newLotteryTicket.isWinner == NO){
+        cell.annoucementLabel.text = @"Sorry Try again!";
+        cell.annoucementLabel.textColor = [UIColor redColor];
+    } else{
+        cell.annoucementLabel.text = @"Checking ticket...";
+    }
+    
+    cell.winAmountLabel.text = [NSString stringWithFormat:@"$ %lu",newLotteryTicket.winAmount];
     return cell;
+}
+
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    TicketCheckerViewController  *tcVC = (TicketCheckerViewController *)[segue destinationViewController];
+    tcVC.delegate = self;
+    // Pass the selected object to the new view controller.
 }
 
 
@@ -117,17 +193,8 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
-}
-*/
-    
-    //method to check winning numbers
-    //-(void)checkWinnings{
-    //
-    //    for (LotteryTickets *holdingTicket in self.)
-    //    }
-    //}
 
-/*
+
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
@@ -153,14 +220,6 @@
 }
 */
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CellViewController.h"
+#import "LotteryViewControllerTableViewController.h"
 
 @implementation CellViewController
 
@@ -19,15 +20,11 @@
     // Configure the view for the selected state
 }
 
--(
+
+
 
 
 @end
 
 
 
-
-/*
- @property (weak, nonatomic) IBOutlet UILabel *annoucementLabel;
- @property (weak, nonatomic) IBOutlet UILabel *winAmountLabel;
-*/
