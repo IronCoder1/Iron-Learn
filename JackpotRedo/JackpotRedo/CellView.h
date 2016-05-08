@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CellViewController : UITableViewCell
+@interface CellView : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *annoucementLabel;
 @property (weak, nonatomic) IBOutlet UILabel *winAmountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ticketLabel;

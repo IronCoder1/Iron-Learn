@@ -86,7 +86,6 @@
  
  
  [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addTicket:)];
- ((int)currentSpeed < 88)
  - (void)textFieldDidBeginEditing:(UITextField *)textField
  {
  NSLog(@"The did begin edit method was called");
@@ -104,24 +103,11 @@
 
 
 -(instancetype)addResultToArray:(NSString *)tf1 withTf2:(NSString *)tf2 withTf3:(NSString *)tf3 withTf4:(NSString *)tf4 withTf5:(NSString *)tf5 andTf6:(NSString *)tf6{
-    
-    TicketCheckerViewController *newTCVC = [[TicketCheckerViewController alloc]init];
-    [newTCVC addResultToArray:self.checkerTextField1.text withTf2:self.checkerTextField2.text withTf3:self.checkerTextField3.text withTf4:self.checkerTextField4.text withTf5:self.checkerTextField5.text andTf6:self.checkerTextField6.text];
+ 
     return self;
     
 }
- //    [self.ticketToCheck addObject:_checkerTextField1.text];
- //    [self.ticketToCheck addObject:_checkerTextField2.text];
- //    [self.ticketToCheck addObject:_checkerTextField3.text];
- //    [self.ticketToCheck addObject:_checkerTextField4.text];
- //    [self.ticketToCheck addObject:_checkerTextField5.text];
- //    [self.ticketToCheck addObject:_checkerTextField6.text];
- //    [self.ticketToCheck addObject:newResult.checkerTextField1.text];
- //    [self.ticketToCheck addObject:newResult.checkerTextField2.text];
- //    [self.ticketToCheck addObject:newResult.checkerTextField3.text];
- //    [self.ticketToCheck addObject:newResult.checkerTextField4.text];
- //    [self.ticketToCheck addObject:newResult.checkerTextField5.text];
- //    [self.ticketToCheck addObject:newResult.checkerTextField6.text];
+
 */
 
 

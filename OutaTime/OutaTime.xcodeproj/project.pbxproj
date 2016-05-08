@@ -86,13 +86,13 @@
 		F35CB0301A928FE9000F5151 /* OutaTime */ = {
 			isa = PBXGroup;
 			children = (
-				F3BDE2621A93890600BE2D1C /* digital-7.ttf */,
 				F35CB0351A928FE9000F5151 /* AppDelegate.h */,
 				F35CB0361A928FE9000F5151 /* AppDelegate.m */,
 				F35CB05A1A929045000F5151 /* TimeCircuitsViewController.h */,
 				F35CB05B1A929045000F5151 /* TimeCircuitsViewController.m */,
 				F35CB0571A929019000F5151 /* DatePickerViewController.h */,
 				F35CB0581A929019000F5151 /* DatePickerViewController.m */,
+				F3BDE2621A93890600BE2D1C /* digital-7.ttf */,
 				F35CB03B1A928FE9000F5151 /* Main.storyboard */,
 				F35CB03E1A928FE9000F5151 /* Images.xcassets */,
 				F35CB0401A928FE9000F5151 /* LaunchScreen.xib */,

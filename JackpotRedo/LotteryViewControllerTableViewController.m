@@ -8,7 +8,7 @@
 
 #import "LotteryViewControllerTableViewController.h"
 #import "TicketCheckerViewController.h"
-#import "CellViewController.h"
+#import "CellView.h"
 #import "LotteryTickets.h"
 
 @interface LotteryViewControllerTableViewController ()<TicketCheckerViewControllerDelegate>
@@ -140,7 +140,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CellViewController *cell = (CellViewController *)[tableView dequeueReusableCellWithIdentifier:@"quickPickCell" forIndexPath:indexPath];
+    CellView *cell = (CellView *)[tableView dequeueReusableCellWithIdentifier:@"quickPickCell" forIndexPath:indexPath];
     
 //    LotteryTickets *newLotteryTicket = self.ticketListArray[indexPath.row];
 //    cell.textLabel.text = [newLotteryTicket.lotteryNumbers componentsJoinedByString:@","];

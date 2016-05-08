@@ -6,10 +6,10 @@
 //  Copyright © 2016 moorsideinc. All rights reserved.
 //
 
-#import "CellViewController.h"
+#import "CellView.h"
 #import "LotteryViewControllerTableViewController.h"
 
-@implementation CellViewController
+@implementation CellView
 
 - (void)awakeFromNib {
     // Initialization code
