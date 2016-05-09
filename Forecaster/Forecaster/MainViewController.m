@@ -10,7 +10,7 @@
 #import "CurrentForecast.h"
 #import "CellView.h"
 
-@interface MainViewController ()<UITextFieldDelegate, LocationDelegate>
+@interface MainViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) NSMutableArray *locationArray;
 
 - (IBAction)enterCity:(id)sender;
@@ -24,14 +24,6 @@
     
     self.title = @"Current Weather";
     
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
 }
 
 
@@ -39,42 +31,14 @@
 
 -(void)getWeatherJSON{
     
- NSString *darkSkyUrl = @"https://api.forecast.io/forecast/92c99d3c6e34eb5b41149178890b6c02/";
-    
-    NSURLSession *session = [NSURLSession sharedSession];
-    
-    NSURLSessionDataTask *jsonData = [session dataTaskWithURL:[NSURL URLWithString:darkSkyUrl] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-                                     {
-                                         NSError *jsonerror;
-        NSMutableDictionary *weatherJSONdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error: &jsonerror];
-            if (!error){
-                
-                CurrentForecast *theCurrentForecastObject = [[CurrentForecast alloc]init];
-                
-                 theCurrentForecastObject.summary = weatherJSONdict[@"currently"][@"summary"];
-                 theCurrentForecastObject.temperature = weatherJSONdict[@"currently"][@"temperature"];
-                
-                
-                
-//                locationObject.currently = theCurrentForecastObject;
-                
-                
-                NSLog(@"%@ summanry", theCurrentForecastObject.summary);
-                
-            }
-              dispatch_async(dispatch_get_main_queue(), ^{[self.tableView reloadData];});
-        }
-    
-    ];
-    [jsonData resume];
     
 }
 
--(void)loadCity{
-
-    [self getWeatherJSON];
-
-}
+//-(void)loadCity{
+//
+//    [self getWeatherJSON];
+//
+//}
 
 
 
@@ -98,17 +62,18 @@
     
     CellView *cell = (CellView *)[tableView dequeueReusableCellWithIdentifier:@"weatherCell" forIndexPath:indexPath];
     
-    Location *loc = [[Location alloc]init];
-    
+    NSUInteger row = indexPath.row;
+    Location *thisLocationObject = [self.locationArray objectAtIndex:row];
+    cell.cityLabel.text = thisLocationObject.cityName;
     cell.cityLabel.font = [UIFont fontWithName:@"Menlo" size:12];
     cell.cityLabel.textColor = [UIColor blueColor];
-    cell.cityLabel.text = self.cityEntered;
-    
+   
+    cell.tempLabel.text = [NSString stringWithFormat:@" %@", thisLocationObject.currently.temperature];
     cell.tempLabel.font = [UIFont fontWithName:@"Menlo" size:22];
-    cell.tempLabel.text = loc.currently.temperature;
+    cell.tempLabel.textColor = [UIColor greenColor];
     
     cell.currWeatherLabel.font = [UIFont fontWithName:@"helvetica" size:17];
-    cell.currWeatherLabel.text = loc.currently.summary;
+    cell.currWeatherLabel.text = thisLocationObject.currently.summary;
 
     
     return cell;
@@ -157,6 +122,19 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
+ 
+ 
+ - (void)coordsForAddress {
+ 
+ 
+ 
+ 
+ 
+ [self.delegate loadCity];
+ 
+ 
+ }];
+ }
 */
 
 - (IBAction)enterCity:(id)sender {
@@ -165,37 +143,65 @@
     
     UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Go" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
       
-        UITextField *city = myAlert.textFields[0];
+    UITextField *city = myAlert.textFields[0];
+    Location *locObj = [[Location alloc] init];
+        //assign text to location object
+    locObj.cityName = city.text;
         
-        Location *locObj = [[Location alloc] init];
-        locObj.cityName = city.text;
-        [locObj coordsForAddress];
-        locObj.delegate = self;
+    
+    CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
+    
+    [geoCoder geocodeAddressString:locObj.cityName completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error){
+    CLPlacemark *placemark = placemarks[0];
+            NSLog(@"Lat: %f, Long: %f", placemark.location.coordinate.latitude, placemark.location.coordinate.longitude);
+    locObj.coordinates = CLLocationCoordinate2DMake (placemark.location.coordinate.latitude, placemark.location.coordinate.longitude);
         
+        //Perform an asynchronous network call to ask the Forecast.io weather API for weather info on each location in the list.
+       
+        NSString *darkSkyUrl = [NSString stringWithFormat:@"https://api.forecast.io/forecast/92c99d3c6e34eb5b41149178890b6c02/%f,%f",locObj.coordinates.latitude, locObj.coordinates.longitude];
+        
+        NSURLSession *session = [NSURLSession sharedSession];
+        
+        NSURLSessionDataTask *jsonData = [session dataTaskWithURL:[NSURL URLWithString:darkSkyUrl] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+        {
+                      NSError *jsonerror;
+                      NSMutableDictionary *weatherJSONdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error: &jsonerror];
+                            if (!error){
+                             CurrentForecast *theCurrentForecastObject = [[CurrentForecast alloc]init];
+                                theCurrentForecastObject.summary = weatherJSONdict[@"currently"][@"summary"];
+                                theCurrentForecastObject.temperature = weatherJSONdict[@"currently"][@"temperature"];
+                                                  
+                                locObj.currently = theCurrentForecastObject;
+                    NSLog(@"%@ summanry", theCurrentForecastObject.summary);
+                                
+                           }
+                dispatch_async(dispatch_get_main_queue(), ^{[self.tableView reloadData];});
+         }
+                                          
+                                          ];
+        [jsonData resume];
+
         [self.locationArray addObject:locObj];
     
-        
+}];
         NSLog(@"The city is %@", locObj.cityName);
     
     }];
-
-    // instansiate cancel button using blocks
-    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){
         
-    }];
+    
+    // instansiate cancel button using blocks
+    UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action){}];
     
     [myAlert addAction:ok];
     [myAlert addAction:cancel];
     
-    [myAlert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
-        textField.placeholder = @"City...";
-    }];
+    [myAlert addTextFieldWithConfigurationHandler:^(UITextField * textField) {textField.placeholder = @"City..."; }];
     
     [self presentViewController:myAlert animated:YES completion:nil];
     
-    
-
 }
+                        
+                         
 
 
 @end

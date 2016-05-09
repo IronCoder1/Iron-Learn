@@ -11,17 +11,17 @@
 #import <CoreLocation/CoreLocation.h>
 
 
-@protocol LocationDelegate<NSObject>
-
--(void)loadCity;
-
-@end
+//@protocol LocationDelegate<NSObject>
+//
+//-(void)loadCity;
+//
+//@end
 @interface Location : NSObject
-@property  (nonatomic, weak)id<LocationDelegate>delegate;
+//@property  (nonatomic, weak)id<LocationDelegate>delegate;
 @property (copy, nonatomic) NSString *cityName;  //userinput
 @property (assign, nonatomic) CLLocationCoordinate2D coordinates;
 @property (strong, nonatomic ) CurrentForecast *currently;
 
-- (void)coordsForAddress;
+//- (void)coordsForAddress;
 
 @end
