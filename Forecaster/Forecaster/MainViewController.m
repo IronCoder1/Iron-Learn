@@ -20,19 +20,17 @@
 @implementation MainViewController
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
+    self.locationArray = [[NSMutableArray alloc]initWithCapacity:0];
     
     self.title = @"Current Weather";
-    
 }
 
-
-
-
--(void)getWeatherJSON{
-    
-    
-}
+//-(void)getWeatherJSON{
+//    
+//    
+//}
 
 //-(void)loadCity{
 //
@@ -62,15 +60,15 @@
     
     CellView *cell = (CellView *)[tableView dequeueReusableCellWithIdentifier:@"weatherCell" forIndexPath:indexPath];
     
-    NSUInteger row = indexPath.row;
-    Location *thisLocationObject = [self.locationArray objectAtIndex:row];
+    //NSUInteger row = indexPath.row;
+    Location *thisLocationObject = self.locationArray[indexPath.row];
     cell.cityLabel.text = thisLocationObject.cityName;
     cell.cityLabel.font = [UIFont fontWithName:@"Menlo" size:12];
     cell.cityLabel.textColor = [UIColor blueColor];
    
     cell.tempLabel.text = [NSString stringWithFormat:@" %@", thisLocationObject.currently.temperature];
     cell.tempLabel.font = [UIFont fontWithName:@"Menlo" size:22];
-    cell.tempLabel.textColor = [UIColor greenColor];
+    cell.tempLabel.textColor = [UIColor redColor];
     
     cell.currWeatherLabel.font = [UIFont fontWithName:@"helvetica" size:17];
     cell.currWeatherLabel.text = thisLocationObject.currently.summary;
@@ -125,10 +123,7 @@
  
  
  - (void)coordsForAddress {
- 
- 
- 
- 
+
  
  [self.delegate loadCity];
  
@@ -147,6 +142,8 @@
     Location *locObj = [[Location alloc] init];
         //assign text to location object
     locObj.cityName = city.text;
+        // add object to array
+        [self.locationArray addObject:locObj];
         
     
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
@@ -181,7 +178,7 @@
                                           ];
         [jsonData resume];
 
-        [self.locationArray addObject:locObj];
+        
     
 }];
         NSLog(@"The city is %@", locObj.cityName);

@@ -11,7 +11,7 @@
 #import <CoreLocation/CoreLocation.h>
 
 
+
 @interface MainViewController : UITableViewController
-@property (copy, nonatomic) NSString *cityEntered;
 
 @end

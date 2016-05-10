@@ -12,9 +12,9 @@
 @property (copy, nonatomic) NSString * summary;
 
 @property (copy, nonatomic) NSString * icon;
-@property (assign, nonatomic) NSNumber *temperature;
+@property (strong, nonatomic) NSNumber *temperature;
 @property (copy, nonatomic) NSString * visibility;
-@property (assign, nonatomic) NSNumber *humidity;
-@property (assign, nonatomic) NSNumber * pressure;
+@property (strong, nonatomic) NSNumber *humidity;
+@property (strong, nonatomic) NSNumber * pressure;
 
 @end
