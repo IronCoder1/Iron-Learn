@@ -13,8 +13,9 @@
 
 @property (copy, nonatomic) NSString * icon;
 @property (strong, nonatomic) NSNumber *temperature;
-@property (copy, nonatomic) NSString * visibility;
+@property (strong, nonatomic) NSNumber * visibility;
 @property (strong, nonatomic) NSNumber *humidity;
+@property (strong, nonatomic) NSNumber *windSpeed;
 @property (strong, nonatomic) NSNumber * pressure;
 
 @end

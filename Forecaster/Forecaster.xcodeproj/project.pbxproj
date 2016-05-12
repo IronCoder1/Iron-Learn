@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		6C1521AB1CDF089100779598 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1521AA1CDF089100779598 /* Location.m */; };
 		6C1521AE1CDF0C1600779598 /* CurrentForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C1521AD1CDF0C1600779598 /* CurrentForecast.m */; };
+		6C3A811D1CE1E58E00B56C2E /* DetailForecastViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A811C1CE1E58E00B56C2E /* DetailForecastViewController.m */; };
+		6C3A81201CE1F9E500B56C2E /* WeeklyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A811F1CE1F9E500B56C2E /* WeeklyForecast.m */; };
 		6C75B02A1CDEEB5100B4CB10 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C75B0291CDEEB5100B4CB10 /* main.m */; };
 		6C75B02D1CDEEB5100B4CB10 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C75B02C1CDEEB5100B4CB10 /* AppDelegate.m */; };
 		6C75B0331CDEEB5100B4CB10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C75B0311CDEEB5100B4CB10 /* Main.storyboard */; };
@@ -17,6 +19,9 @@
 		6C75B0401CDEEB6A00B4CB10 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C75B03F1CDEEB6A00B4CB10 /* CoreLocation.framework */; };
 		6C75B0431CDEF41D00B4CB10 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C75B0421CDEF41D00B4CB10 /* MainViewController.m */; };
 		6C75B0491CDEF82D00B4CB10 /* CellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C75B0481CDEF82D00B4CB10 /* CellView.m */; };
+		6CE0AF2D1CE264CA00B31710 /* DailyForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0AF2C1CE264CA00B31710 /* DailyForecast.m */; };
+		6CE0AF301CE27FAC00B31710 /* WeeklyForecastTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0AF2F1CE27FAC00B31710 /* WeeklyForecastTViewController.m */; };
+		6CE0AF331CE284DD00B31710 /* CellViewWeekly.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE0AF321CE284DD00B31710 /* CellViewWeekly.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +29,10 @@
 		6C1521AA1CDF089100779598 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		6C1521AC1CDF0C1600779598 /* CurrentForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentForecast.h; sourceTree = "<group>"; };
 		6C1521AD1CDF0C1600779598 /* CurrentForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentForecast.m; sourceTree = "<group>"; };
+		6C3A811B1CE1E58E00B56C2E /* DetailForecastViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailForecastViewController.h; sourceTree = "<group>"; };
+		6C3A811C1CE1E58E00B56C2E /* DetailForecastViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailForecastViewController.m; sourceTree = "<group>"; };
+		6C3A811E1CE1F9E500B56C2E /* WeeklyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeeklyForecast.h; sourceTree = "<group>"; };
+		6C3A811F1CE1F9E500B56C2E /* WeeklyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeeklyForecast.m; sourceTree = "<group>"; };
 		6C75B0251CDEEB5100B4CB10 /* Forecaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Forecaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C75B0291CDEEB5100B4CB10 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6C75B02B1CDEEB5100B4CB10 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -37,6 +46,12 @@
 		6C75B0421CDEF41D00B4CB10 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		6C75B0471CDEF82D00B4CB10 /* CellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellView.h; sourceTree = "<group>"; };
 		6C75B0481CDEF82D00B4CB10 /* CellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellView.m; sourceTree = "<group>"; };
+		6CE0AF2B1CE264CA00B31710 /* DailyForecast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyForecast.h; sourceTree = "<group>"; };
+		6CE0AF2C1CE264CA00B31710 /* DailyForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyForecast.m; sourceTree = "<group>"; };
+		6CE0AF2E1CE27FAC00B31710 /* WeeklyForecastTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeeklyForecastTViewController.h; sourceTree = "<group>"; };
+		6CE0AF2F1CE27FAC00B31710 /* WeeklyForecastTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeeklyForecastTViewController.m; sourceTree = "<group>"; };
+		6CE0AF311CE284DD00B31710 /* CellViewWeekly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellViewWeekly.h; sourceTree = "<group>"; };
+		6CE0AF321CE284DD00B31710 /* CellViewWeekly.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellViewWeekly.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,12 +89,22 @@
 				6C75B02B1CDEEB5100B4CB10 /* AppDelegate.h */,
 				6C75B02C1CDEEB5100B4CB10 /* AppDelegate.m */,
 				6C75B0311CDEEB5100B4CB10 /* Main.storyboard */,
+				6CE0AF2E1CE27FAC00B31710 /* WeeklyForecastTViewController.h */,
+				6CE0AF2F1CE27FAC00B31710 /* WeeklyForecastTViewController.m */,
+				6CE0AF311CE284DD00B31710 /* CellViewWeekly.h */,
+				6CE0AF321CE284DD00B31710 /* CellViewWeekly.m */,
 				6C75B0471CDEF82D00B4CB10 /* CellView.h */,
 				6C75B0481CDEF82D00B4CB10 /* CellView.m */,
 				6C75B0411CDEF41D00B4CB10 /* MainViewController.h */,
 				6C75B0421CDEF41D00B4CB10 /* MainViewController.m */,
+				6C3A811B1CE1E58E00B56C2E /* DetailForecastViewController.h */,
+				6C3A811C1CE1E58E00B56C2E /* DetailForecastViewController.m */,
 				6C1521A91CDF089100779598 /* Location.h */,
 				6C1521AA1CDF089100779598 /* Location.m */,
+				6C3A811E1CE1F9E500B56C2E /* WeeklyForecast.h */,
+				6C3A811F1CE1F9E500B56C2E /* WeeklyForecast.m */,
+				6CE0AF2B1CE264CA00B31710 /* DailyForecast.h */,
+				6CE0AF2C1CE264CA00B31710 /* DailyForecast.m */,
 				6C1521AC1CDF0C1600779598 /* CurrentForecast.h */,
 				6C1521AD1CDF0C1600779598 /* CurrentForecast.m */,
 				6C75B0341CDEEB5100B4CB10 /* Assets.xcassets */,
@@ -169,10 +194,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C1521AE1CDF0C1600779598 /* CurrentForecast.m in Sources */,
+				6C3A811D1CE1E58E00B56C2E /* DetailForecastViewController.m in Sources */,
 				6C1521AB1CDF089100779598 /* Location.m in Sources */,
+				6C3A81201CE1F9E500B56C2E /* WeeklyForecast.m in Sources */,
 				6C75B02D1CDEEB5100B4CB10 /* AppDelegate.m in Sources */,
 				6C75B02A1CDEEB5100B4CB10 /* main.m in Sources */,
+				6CE0AF331CE284DD00B31710 /* CellViewWeekly.m in Sources */,
 				6C75B0491CDEF82D00B4CB10 /* CellView.m in Sources */,
+				6CE0AF301CE27FAC00B31710 /* WeeklyForecastTViewController.m in Sources */,
+				6CE0AF2D1CE264CA00B31710 /* DailyForecast.m in Sources */,
 				6C75B0431CDEF41D00B4CB10 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

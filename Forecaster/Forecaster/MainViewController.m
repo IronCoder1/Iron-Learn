@@ -8,10 +8,13 @@
 
 #import "MainViewController.h"
 #import "CurrentForecast.h"
+#import "WeeklyForecast.h"
 #import "CellView.h"
+#import "DetailForecastViewController.h"
 
 @interface MainViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) NSMutableArray *locationArray;
+@property (strong, nonatomic) NSMutableArray *weekDataArray;
 
 - (IBAction)enterCity:(id)sender;
 
@@ -77,60 +80,25 @@
     return cell;
 }
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    //call performseguemethod on herotableview instance and the sender is nil
+    [self performSegueWithIdentifier:@"toDetailSegue" sender:nil];
+    
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    DetailForecastViewController *dfvc = (DetailForecastViewController *)[segue destinationViewController];
+    NSIndexPath *newPath = [self.tableView indexPathForSelectedRow];
+    
+    Location  *locObject = self.locationArray[newPath.row];
+    
+    dfvc.holdingLocationDFVC  = locObject;
+    
+    
+    
+    
 }
- 
- 
- - (void)coordsForAddress {
-
- 
- [self.delegate loadCity];
- 
- 
- }];
- }
-*/
 
 - (IBAction)enterCity:(id)sender {
     
@@ -144,6 +112,7 @@
     locObj.cityName = city.text;
         // add object to array
         [self.locationArray addObject:locObj];
+        
         
     
     CLGeocoder *geoCoder = [[CLGeocoder alloc] init];
@@ -162,14 +131,40 @@
         NSURLSessionDataTask *jsonData = [session dataTaskWithURL:[NSURL URLWithString:darkSkyUrl] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
         {
                       NSError *jsonerror;
-                      NSMutableDictionary *weatherJSONdict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error: &jsonerror];
+                      NSMutableDictionary *mainForecastDict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error: &jsonerror];
                             if (!error){
                              CurrentForecast *theCurrentForecastObject = [[CurrentForecast alloc]init];
-                                theCurrentForecastObject.summary = weatherJSONdict[@"currently"][@"summary"];
-                                theCurrentForecastObject.temperature = weatherJSONdict[@"currently"][@"temperature"];
-                                                  
+                                theCurrentForecastObject.summary = mainForecastDict[@"currently"][@"summary"];
+                                theCurrentForecastObject.temperature = mainForecastDict[@"currently"][@"temperature"];
+                                theCurrentForecastObject.icon = mainForecastDict[@"currently"][@"icon"];
+                                theCurrentForecastObject.visibility = mainForecastDict[@"currently"][@"visibility"];
+                                theCurrentForecastObject.humidity = mainForecastDict[@"currently"][@"humidity"];
+                                theCurrentForecastObject.pressure = mainForecastDict[@"currently"][@"pressure"];
+                                theCurrentForecastObject.windSpeed = mainForecastDict[@"currently"][@"windSpeed"];
                                 locObj.currently = theCurrentForecastObject;
-                    NSLog(@"%@ summanry", theCurrentForecastObject.summary);
+                                
+//                                NSDictionary *dailyDict = mainForecastDict[@"daily"];
+//                                
+//                          //   WeeklyForecast *weeklyForcastObj = [[WeeklyForecast alloc] init];
+//                                
+//                                
+//                                NSMutableArray *weeklyWeatherArray = [[NSMutableArray alloc]initWithCapacity:0];
+//                                NSArray *dailyDataArray = dailyDict[@"data"];
+//                                for (NSDictionary *loopDict in dailyDataArray){
+//                                    DailyForecast *dailyWeatherObj = [[DailyForecast alloc]init];
+//
+//                                    dailyWeatherObj.sunriseTime = loopDict[@"sunriseTime"];
+//                                    dailyWeatherObj.sunsetTime = loopDict[@"sunsetTime"];
+//                                    dailyWeatherObj.day = loopDict[@"time"];
+//                                    dailyWeatherObj.dailyIcon = loopDict[@"icon"];
+//                                    dailyWeatherObj.dailySummary = loopDict[@"summary"];
+//                                    dailyWeatherObj.weeklySummary = dailyDict[@"summary"];
+//                                    [weeklyWeatherArray addObject:dailyWeatherObj];
+//                                }
+//
+//                                
+//                                    self.weekDataArray = weeklyWeatherArray;
+ //                                   locObj.dailyForcastObjInLocation = dailyWeatherObj;
                                 
                            }
                 dispatch_async(dispatch_get_main_queue(), ^{[self.tableView reloadData];});
@@ -192,7 +187,10 @@
     [myAlert addAction:ok];
     [myAlert addAction:cancel];
     
-    [myAlert addTextFieldWithConfigurationHandler:^(UITextField * textField) {textField.placeholder = @"City..."; }];
+    [myAlert addTextFieldWithConfigurationHandler:^(UITextField * textField) {
+        textField.placeholder = @"City...";
+        [textField spellCheckingType];
+    }];
     
     [self presentViewController:myAlert animated:YES completion:nil];
     
